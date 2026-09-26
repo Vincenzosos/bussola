@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Trading Lab · SV Terminal</title>
+<meta name="description" content="SV Terminal · Trading Lab: public snapshot of a paper-money training exercise run by an AI-designed model. Not investment advice.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SV Terminal">
+<meta property="og:title" content="SV Terminal · Trading Lab">
+<meta property="og:description" content="A public paper-money trading lab: 24 strategies fixed in advance, retail costs and Italian tax, live record since 25 Sep 2026. Not investment advice.">
+<meta property="og:url" content="https://vincenzosos.github.io/sv-terminal/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="css/home.css">
+<link rel="stylesheet" href="css/portfolio.css">
+<link rel="stylesheet" href="css/explore.css">
+<link rel="stylesheet" href="css/lab.css">
+<link rel="stylesheet" href="css/static.css">
+<script>
+  try { const t = new URLSearchParams(location.search).get("theme") || localStorage.getItem("bussola-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+        else document.documentElement.dataset.theme = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"; } catch (_) {}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/lightweight-charts@4.2.3/dist/lightweight-charts.standalone.production.js" integrity="sha384-stKllnUqA9AD0gsKCuUtf5XlqAW7PwIgDagoNsTWkjkBmJ/GZ/uHTgEBxdLV2VSK" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous" defer></script>
+</head>
+<body data-ws="real">
+<a class="skip-link" id="skip-link" href="#/">Skip to content</a>
+<header class="top">
+  <div class="top-inner">
+    <a class="logo" href="#/home" aria-label="SV Terminal, overview">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><rect x="2.5" y="2.5" width="19" height="19" rx="1.5" stroke="currentColor" stroke-width="1.8"/><path d="M10.6 9.2V7.2H6.4v4.8h4.2v4.8H6.4v-2" stroke="currentColor" stroke-width="1.8"/><path d="M12.8 7.2l2.7 9.6 2.7-9.6" stroke="currentColor" stroke-width="1.8" stroke-linejoin="bevel"/></svg>
+      <span>SV TERMINAL</span>
+    </a>
+    <div class="mode" role="group" aria-label="Workspace" id="mode">
+      <button type="button" data-mode="invest" aria-pressed="true"><b>My Portfolio</b><small>real money · buy and hold</small></button>
+      <button type="button" data-mode="trade" aria-pressed="false"><b>Trading Lab</b><small>paper money only</small></button>
+    </div>
+    <label class="cmd" id="search-open">
+      <span class="prompt" id="cmd-prompt" aria-hidden="true">HOME ›</span>
+      <input id="cmd-in" autocomplete="off" spellcheck="false" autocapitalize="characters" aria-label="Command line: type a code, a fund, a share or an ISIN" placeholder="Code, fund or ISIN — e.g. TAX, SWCH SWDA">
+      <span class="resolve" id="cmd-resolve" aria-live="polite"></span>
+      <span class="hint" aria-hidden="true"><kbd>/</kbd><kbd id="cmd-k">⌘K</kbd></span>
+      <button class="go" type="button" id="cmd-go">GO</button>
+    </label>
+    <div class="top-right">
+      <div class="live" id="live" role="status"><i></i><span>CONNECTING</span></div>
+      <span class="clock" id="clock" title="Rome time"><span id="clock-t">--:--:--</span><small>Rome</small></span>
+      <a class="icon-btn" href="#/alerts" id="bell" data-nav="alerts" aria-label="Alerts and daily briefing"><span class="count" id="badge" hidden></span></a>
+      <button class="icon-btn theme" id="theme-toggle" type="button" aria-label="Switch theme"></button>
+    </div>
+  </div>
+  <nav class="tabs" id="tabs" aria-label="Pages"></nav>
+  <div class="ticker" aria-label="Markets, Lang &amp; Schwarz indications"><span class="ticker-label">MKTS</span><div class="ticker-track" id="tape"></div></div>
+</header>
+<div class="pub-disclaimer" id="pub-disclaimer" role="note" aria-label="Disclaimer"><b class="tag">Not advice<small>paper money only</small></b><p><strong>Paper money only.</strong> An educational training exercise run by an AI-designed model. Not a financial service, not investment advice, not a recommendation or solicitation to buy or sell any security. The owner provides no investment services. Simulated results do not predict future results.<span class="src">Public snapshot · the Trading Lab in clear, My Portfolio encrypted · no orders · no credentials · no link to Trade Republic · prices: Lang &amp; Schwarz indications, for personal use.</span></p></div>
+<main class="page" id="page" tabindex="-1"></main>
+<footer class="foot">
+  <p><strong>Trading Lab: Paper money only. An educational training exercise run by an AI-designed model. Not a financial service, not investment advice, not a recommendation or solicitation to buy or sell any security. The owner provides no investment services. Simulated results do not predict future results.</strong> My Portfolio is the owner's own portfolio: not advice either.</p>
+  <p>This is a public, read-only snapshot of SV Terminal, a personal app that runs on its owner's computer. The Trading Lab trades pretend money on real Lang &amp; Schwarz prices (indicative quotes, fetched for personal use), with Trade Republic's €1 fee and the 2026 transaction taxes; it places no orders and has no link to any broker. My Portfolio is the owner's real money and is published only encrypted (AES-256-GCM). Snapshots: about every 30 minutes 07:30–23:00 Berlin on weekdays while the owner's computer runs, and after the lab's nightly step. Charts: TradingView Lightweight Charts.</p>
+</footer>
+<footer class="statusbar" id="statusbar" aria-label="Status">
+  <span class="mk" data-tz="Europe/Rome" title="Borsa Italiana, 09:00–17:30 Rome time. Weekends are known; exchange holidays are not."><b>MIL</b><span class="t">--:--</span><span class="st closed">○ CLOSED</span></span>
+  <span class="mk" data-tz="Europe/London" title="London Stock Exchange, 08:00–16:30 London time. Weekends are known; exchange holidays are not."><b>LDN</b><span class="t">--:--</span><span class="st closed">○ CLOSED</span></span>
+  <span class="mk" data-tz="America/New_York" title="New York (NYSE, Nasdaq), 09:30–16:00 New York time. Weekends are known; exchange holidays are not."><b>NYC</b><span class="t">--:--</span><span class="st closed">○ CLOSED</span></span>
+  <span class="conn idle hide-sm" id="sb-conn">○ CONNECTING</span>
+  <span class="ws-tag" id="sb-ws">REAL MONEY</span>
+  <span class="src hide-sm" id="sb-src">Quotes: Lang &amp; Schwarz, indicative</span>
+  <span class="grow hide-sm">Paper money only · educational exercise · not investment advice · simulated results do not predict future results</span>
+  <span class="keys hide-sm" title="1–9 focus a panel; for 10 and up type both digits quickly, or the number in the palette"><kbd>/</kbd>command <kbd>1–9</kbd>panel <kbd>?</kbd>keys</span>
+</footer>
+
+<aside class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+  <div class="drawer-inner">
+    <header class="card-h" id="drawer-head"><span class="card-n" id="drawer-n" aria-hidden="true">D</span><span class="card-code" id="drawer-code"></span><h2 id="drawer-title">Details</h2>
+      <span class="more" style="margin-left:auto"><button class="icon-btn" id="drawer-close" type="button" aria-label="Close"></button></span></header>
+    <div class="body" id="drawer-body"></div>
+  </div>
+</aside>
+<div class="palette" id="palette" hidden role="dialog" aria-modal="true" aria-label="Command palette">
+  <div class="palette-box">
+    <div class="palette-in"><span class="prompt" id="palette-prompt">HOME ›</span><input id="palette-q" placeholder="Code, fund, share or ISIN…" autocomplete="off" spellcheck="false" aria-label="Search codes, funds, shares and ISINs" aria-controls="palette-list"><kbd>esc</kbd></div>
+    <div class="palette-list" id="palette-list" role="listbox" aria-label="Results"></div>
+    <div class="palette-foot" aria-hidden="true"><span>↑↓ move</span><span>⏎ open</span><span>tab complete</span><span>esc close</span></div>
+  </div>
+</div>
+<div class="tip" id="tip" role="tooltip" hidden></div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script src="js/static.js" defer></script>
+<script src="js/core.js" defer></script>
+<script src="js/charts.js" defer></script>
+<script src="js/pages/home.js" defer></script>
+<script src="js/pages/portfolio.js" defer></script>
+<script src="js/pages/explore.js" defer></script>
+<script src="js/pages/lab.js" defer></script>
+<script src="js/pages/lab_analysis.js" defer></script>
+<script src="js/pages/lab_ops.js" defer></script>
+<script src="js/pages/alerts.js" defer></script>
+<script src="js/lock.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>

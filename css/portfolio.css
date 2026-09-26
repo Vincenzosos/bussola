@@ -1,0 +1,188 @@
+/* Portfolio (My Portfolio) page styles. Design system v5 tokens only (web/app.css Part 1): no colour values here.
+   Classes are prefixed pf-. Works in dark and light (:root[data-theme="light"]) and at 390px. */
+
+/* ---------------------------------------------------------------- tabs: the command code before each label */
+.pf-tabcode { font: var(--fw-semi) var(--fs-label) / 1 var(--font-mono); letter-spacing: .04em; color: var(--ws); margin-right: var(--sp-2); }
+.subtabs a[aria-current="page"] .pf-tabcode { color: var(--ws); }
+
+/* ---------------------------------------------------------------- panel bodies */
+.pf-page > .grid + .grid, .pf-page > .stats + .grid { margin-top: var(--gap); }
+.pf-slot { flex: 1 1 auto; display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; min-height: 0; }
+.card-b.flush > .pf-slot { gap: 0; }
+.pf-slot > .chart.fill { flex: 1 1 auto; min-height: var(--chart-m); }
+.pf-pad { padding: var(--sp-3) var(--pad); }
+.card-b.flush .pf-pad { border-top: var(--bw) solid var(--line); }
+.pf-tools { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-3); width: 100%; min-width: 0; }
+.pf-tools .grow { flex: 1 1 auto; }
+.pf-tools .note { min-width: 0; }
+.pf-change { font: var(--fw-medium) var(--fs-data) / 1.2 var(--font-mono); white-space: nowrap; }
+.pf-change .muted { margin-right: var(--sp-1); }
+.pf-inline { display: inline-flex; align-items: center; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); min-width: 0; }
+.pf-wrap { white-space: normal; text-align: left; font-family: var(--font-sans); color: var(--ink-2); }
+.pf-row { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-3); }
+.pf-dotted { border-bottom: 1px dotted var(--ink-3); cursor: help; }
+.pf-grey, .pf-grey .up, .pf-grey .down { color: var(--ink-3); }
+.pf-strike { text-decoration: line-through; color: var(--ink-3); }
+.pf-strike::after { content: " ⊘"; text-decoration: none; display: inline-block; }
+.pf-slot > .btn, .pf-slot > a.btn, .pf-main > .btn { align-self: flex-start; }
+.pf-showall { padding: var(--sp-3) var(--pad); border-top: var(--bw) solid var(--line); }
+.pf-tick { font-size: var(--fs-label); }
+.card-h .pf-tick { font: var(--fw-semi) var(--fs-label) / 1 var(--font-mono); color: var(--ws); }
+
+/* facts list with numbers at the right (dt/dd): tighter than .kv, text allowed to wrap on the left */
+.pf-kv > dt { padding-right: var(--sp-4); }
+.pf-kv > dd { white-space: nowrap; }
+.pf-kv > dd small { font-family: var(--font-sans); }
+.pf-kv > dd .pf-wrap { white-space: normal; display: block; max-width: 34ch; margin-left: auto; text-align: right; }
+
+/* ---------------------------------------------------------------- warning chip (section 3.4): --warn border, small caps, focusable */
+.pf-flag {
+  display: inline-flex; align-items: center; gap: 3px; height: 18px; padding: 0 6px; border: var(--bw) solid var(--warn); border-radius: var(--r-1);
+  background: var(--warn-wash); color: var(--warn); font: var(--fw-semi) var(--fs-label) / 1 var(--font-cond); letter-spacing: var(--track-caps);
+  text-transform: uppercase; white-space: nowrap; cursor: help; text-decoration: none !important; vertical-align: 1px; flex: none;
+}
+.pf-flag::before { content: "◐"; font-size: 9px; }
+.pf-flag:hover, .pf-flag:focus-visible { background: var(--warn); color: var(--card); }
+.pf-flagrow { display: flex; flex-wrap: wrap; gap: var(--sp-2); padding: var(--sp-3) var(--pad); border-top: var(--bw) solid var(--line); }
+.stat .d .pf-flag { margin-left: var(--sp-1); }
+
+/* coverage badge (MOVE) */
+.pf-coverage {
+  display: inline-flex; align-items: center; height: 18px; padding: 0 6px; border: var(--bw) solid var(--you); border-radius: var(--r-1);
+  background: var(--you-wash); color: var(--you); font: var(--fw-semi) var(--fs-label) / 1 var(--font-mono); white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- dense tables */
+.pf-mini td, .pf-mini th { height: var(--h-row-tight); }
+.table.pf-mini th, .table.pf-mini td { padding-left: 6px; padding-right: 6px; }
+.table.pf-mini th:first-child, .table.pf-mini td:first-child { padding-left: var(--pad); }
+.table.pf-mini th:last-child, .table.pf-mini td:last-child { padding-right: var(--pad); }
+.pf-mini .nm { white-space: nowrap; }
+.pf-data td { white-space: normal; height: auto; padding-top: 5px; padding-bottom: 5px; line-height: 1.4; }
+.pf-data td:first-child { white-space: nowrap; }
+.pf-holdtable .pf-fundname { max-width: 26ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pf-holdtable td.num, .pf-holdtable th.num { padding-left: var(--sp-3); }
+.pf-live { border-radius: var(--r-1); }
+.pf-rets td { height: auto; padding-top: 4px; padding-bottom: 4px; vertical-align: top; }
+.pf-rets .pf-diff { font-size: var(--fs-label); color: var(--ink-3); margin-top: 1px; }
+.pf-rets tr.you .pf-diff { display: none; }
+.pf-cal td { height: auto; padding-top: 4px; padding-bottom: 4px; vertical-align: top; }
+.pf-cal .sub.block { font-size: var(--fs-label); }
+.pf-eps td { white-space: nowrap; }
+.pf-replay td { height: auto; padding-top: 4px; padding-bottom: 4px; }
+.pf-edit input.inp { width: 100%; min-width: 80px; }
+.pf-num { text-align: right; font-family: var(--font-mono); max-width: 140px; }
+.pf-audit label { cursor: pointer; }
+
+/* MNTH heat cells: the sign is printed, the tint repeats it (never colour alone); steps |r| <1%, 1–3%, 3–6%, >=6% */
+.pf-heat td.num { font-variant-numeric: tabular-nums; }
+.pf-heat td.pf-heat-p1 { background: color-mix(in oklab, var(--up) 8%, transparent) !important; }
+.pf-heat td.pf-heat-p2 { background: color-mix(in oklab, var(--up) 16%, transparent) !important; }
+.pf-heat td.pf-heat-p3 { background: color-mix(in oklab, var(--up) 28%, transparent) !important; }
+.pf-heat td.pf-heat-p4 { background: color-mix(in oklab, var(--up) 40%, transparent) !important; }
+.pf-heat td.pf-heat-n1 { background: color-mix(in oklab, var(--down) 8%, transparent) !important; }
+.pf-heat td.pf-heat-n2 { background: color-mix(in oklab, var(--down) 16%, transparent) !important; }
+.pf-heat td.pf-heat-n3 { background: color-mix(in oklab, var(--down) 28%, transparent) !important; }
+.pf-heat td.pf-heat-n4 { background: color-mix(in oklab, var(--down) 40%, transparent) !important; }
+.pf-heat td.pf-heat-p4, .pf-heat td.pf-heat-n4 { color: var(--ink); font-weight: var(--fw-semi); }
+
+/* ---------------------------------------------------------------- MOVE */
+.pf-fundmove { display: flex; flex-direction: column; gap: var(--sp-2); }
+.pf-fig { font: var(--fw-regular) var(--fs-data) / 1.3 var(--font-mono); color: var(--ink-2); }
+.pf-fig b { font: var(--fw-semi) var(--fs-kpi) / 1.1 var(--font-sans); margin-right: var(--sp-2); }
+.pf-fig b .dir { font-size: var(--fs-label); vertical-align: .2em; margin-right: .25em; }
+.pf-fig small, .pf-kv small { font-size: var(--fs-label); }
+.pf-split { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--sp-5); align-items: start; flex: 1 1 auto; }
+.pf-split-even { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+.pf-main, .pf-side { display: flex; flex-direction: column; gap: var(--sp-3); min-width: 0; }
+.pf-side .bars { margin-bottom: var(--sp-1); }
+
+/* ---------------------------------------------------------------- facts, sources, rules */
+.pf-facts, .pf-rules, .pf-notes, .pf-srcs { margin: 0; padding-left: 18px; display: grid; gap: var(--sp-3); font-size: var(--fs-body); line-height: 1.5; color: var(--ink-2); }
+.pf-facts b, .pf-srcs b { color: var(--ink); }
+.pf-facts li::marker, .pf-rules li::marker { color: var(--ws); font-family: var(--font-mono); font-weight: var(--fw-semi); }
+.pf-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--sp-7); gap: var(--sp-2) var(--sp-7); }
+.pf-notes li::marker, .pf-srcs li::marker { color: var(--ink-4); }
+.pf-rules { font-size: var(--fs-data); gap: var(--sp-2); }
+.pf-srcs { padding-left: 0; list-style: none; gap: var(--sp-3); }
+.pf-srcs li { padding-left: var(--sp-3); border-left: 2px solid var(--line-2); }
+
+/* BOLL: the two figures side by side, divided by a hairline */
+.pf-conflict { display: grid; grid-template-columns: 1fr 1fr; border: var(--bw) solid var(--line-2); border-radius: var(--r-1); }
+.pf-conflict > div { padding: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-1); min-width: 0; }
+.pf-conflict > div + div { border-left: var(--bw) solid var(--line-2); }
+.pf-conflict small { font-size: var(--fs-data); color: var(--ink-3); }
+.pf-big { font: var(--fw-semi) var(--fs-key) / 1.1 var(--font-sans); color: var(--ink); white-space: nowrap; }
+
+/* each €100 if sold: one stacked bar and its legend */
+.pf-per100 { display: flex; flex-direction: column; gap: var(--sp-2); }
+.pf-per100 .stack { height: 10px; }
+
+/* LAWS */
+.pf-laws { display: grid; gap: var(--sp-4); }
+.pf-laws-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--sp-7); }
+.pf-law { display: grid; gap: var(--sp-1); padding-bottom: var(--sp-3); border-bottom: var(--bw) solid var(--line); }
+.pf-law b { font-size: var(--fs-body); color: var(--ink); }
+.pf-law p { font-size: var(--fs-body); line-height: 1.5; color: var(--ink-2); margin: 0; }
+.pf-srclinks { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-4); font-size: var(--fs-data); }
+
+/* ---------------------------------------------------------------- look-through map row */
+.pf-maprow { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: var(--sp-5); align-items: start; flex: 1 1 auto; }
+.pf-mapcol { display: flex; flex-direction: column; gap: var(--sp-3); min-width: 0; }
+
+/* ---------------------------------------------------------------- controls */
+.pf-field { display: inline-flex; align-items: center; gap: var(--sp-2); font: var(--fw-semi) var(--fs-label) / 1 var(--font-cond); letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--ink-3); }
+.pf-field .inp, .pf-field select { text-transform: none; letter-spacing: 0; }
+.pf-custom { display: inline-flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; color: var(--ink-3); }
+.pf-custom[hidden] { display: none; }
+.pf-custom .inp { width: 150px; }
+.card-b .field select, .pf-tools select { max-width: 100%; }
+.pf-side input[type="range"] { width: 100%; accent-color: var(--you); }
+.pf-side .field > span b { color: var(--ink); font-family: var(--font-mono); margin-left: var(--sp-2); }
+.pf-fxout { margin: 0; }
+.pf-bad { border-left-color: var(--down); color: var(--ink); }
+.pf-rollchart { height: 140px; }
+
+/* ---------------------------------------------------------------- phone and tablet */
+@media (max-width: 1180px) {
+  .pf-split, .pf-split-even { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .pf-maprow { grid-template-columns: minmax(0, 1fr); }
+  .pf-notes, .pf-laws-2 { grid-template-columns: minmax(0, 1fr); }
+  .pf-conflict { grid-template-columns: minmax(0, 1fr); }
+  .pf-conflict > div + div { border-left: 0; border-top: var(--bw) solid var(--line-2); }
+  .pf-big { font-size: 22px; }
+  .pf-slot > .chart.fill { min-height: 220px; }
+  .pf-tools .seg { display: flex; flex-wrap: wrap; flex: 1 1 100%; max-width: 100%; }
+  .pf-tools .seg button { flex: 1 1 auto; }
+  .table.stack-sm.pf-wraptable td { white-space: normal; }
+  .table.stack-sm.pf-wraptable td.wide { justify-content: flex-start; gap: var(--sp-3); }
+  .table.stack-sm.pf-wraptable td.wide::before { min-width: 88px; }
+  .pf-tools .note { display: none; }
+  .pf-kv > dd .pf-wrap { max-width: 22ch; }
+  .pf-custom .inp { width: 128px; }
+  .pf-holdtable .pf-fundname { max-width: 20ch; }
+  .pf-trunc { display: inline-block; max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; }
+  .pf-cal .nm { display: inline-block; max-width: 132px; white-space: normal; }
+  .table.pf-heat th, .table.pf-heat td { padding-left: 4px; padding-right: 4px; }
+  .subtabs .pf-tabcode { margin-right: var(--sp-1); }
+}
+
+/* legends may wrap (long reference names, the list of troughs) */
+.pf-page .legend > span { white-space: normal; }
+
+/* no text under 11px on this page */
+.pf-page small { font-size: var(--fs-label); }
+.pf-tools .chip:disabled { opacity: .45; cursor: default; }
+/* a KPI with no value yet: n/a in the quiet ink, never a link at KPI size */
+.stat .v .pf-na-kpi { color: var(--ink-3); font-weight: var(--fw-regular); }
+@media (max-width: 760px) {
+  /* stacked rows that carried a long label or a flag past the phone's width: they wrap instead */
+  .table.stack-sm.pf-replay td, .table.stack-sm.pf-tax td { white-space: normal; }
+  .table.stack-sm.pf-tax td.wide { justify-content: space-between; }
+}
+@media (max-width: 760px) {
+  .table.pf-stay th:first-child, .table.pf-stay td:first-child, .table.pf-ctx th:first-child, .table.pf-ctx td:first-child { white-space: normal; line-height: 1.3; }
+  .table.pf-stay th, .table.pf-stay td, .table.pf-ctx th, .table.pf-ctx td { padding: 0 var(--sp-2); }
+}

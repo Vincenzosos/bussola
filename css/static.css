@@ -1,0 +1,117 @@
+/* SV Terminal · public snapshot only (publish.py adds this file to the published site): the disclaimer, the lock screen,
+   the public header and the snapshot status. Tokens only (web/app.css); dark and light; 390px phone width. */
+
+/* ---------------------------------------------------------------- the disclaimer, on every public page */
+.pub-disclaimer {
+  display: flex; align-items: stretch; gap: 0;
+  width: calc(100% - 2 * var(--gutter)); max-width: calc(var(--w-max) - 2 * var(--gutter));
+  margin: var(--sp-4) auto 0; border: var(--bw) solid var(--warn); border-left-width: 4px; border-radius: var(--r-1);
+  background: linear-gradient(90deg, var(--warn-wash), transparent 60%), var(--card);
+}
+.pub-disclaimer .tag {
+  flex: none; display: flex; flex-direction: column; justify-content: center; gap: var(--sp-1);
+  padding: var(--sp-3) var(--sp-5); background: var(--warn); color: var(--card);
+  font: var(--fw-bold) 13px / 1.1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase;
+}
+.pub-disclaimer .tag small { font: var(--fw-semi) var(--fs-label) / 1 var(--font-cond); letter-spacing: var(--track-caps); opacity: .9; }
+.pub-disclaimer p { margin: 0; padding: var(--sp-4) var(--sp-5); color: var(--ink); font: var(--fw-regular) 15px / 1.5 var(--font-sans); max-width: none; }
+.pub-disclaimer p strong { font-weight: var(--fw-bold); }
+.pub-disclaimer p span.src { display: block; margin-top: var(--sp-1); color: var(--ink-2); font-size: var(--fs-body); }
+
+/* ---------------------------------------------------------------- snapshot status (top bar and status bar) */
+.live.snap { color: var(--ink-2); }
+.live.snap i { background: var(--ink-3); border-radius: 0; transform: rotate(45deg); width: 6px; height: 6px; }
+.statusbar .conn.snap { color: var(--ink-2); font-weight: var(--fw-semi); }
+.statusbar .conn.snap .sm { display: none; }
+
+/* ---------------------------------------------------------------- the lock screen */
+.pub-lock-grid .card-b { gap: var(--sp-5); }
+.pub-form { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-4); }
+.pub-field { display: flex; align-items: center; gap: var(--sp-4); cursor: text; }
+.pub-field .prompt { font: var(--fw-bold) 13px / 1 var(--font-mono); letter-spacing: .08em; color: var(--ws); white-space: nowrap; }
+.pub-box { position: relative; display: inline-flex; }
+.pub-cells { display: inline-flex; gap: var(--sp-2); }
+.pub-cells span {
+  display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 46px;
+  border: var(--bw) solid var(--line-2); border-radius: var(--r-1); background: var(--raised);
+  font: var(--fw-bold) 18px / 1 var(--font-mono); color: var(--ink);
+}
+.pub-cells span.on { border-color: var(--line-3); }
+.pub-box:focus-within .pub-cells span.cur { border-color: var(--ws); box-shadow: inset 0 -2px 0 var(--ws); }
+.pub-box:focus-within .pub-cells span.cur::after { content: "_"; color: var(--ws); animation: pub-blink 1s steps(1) infinite; }
+.pub-box:focus-within .pub-cells { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: var(--r-1); }
+.pub-code {
+  position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; border: 0; padding: 0; margin: 0;
+  font-size: 16px; /* no zoom on iOS */ color: transparent; background: transparent; caret-color: transparent;
+}
+.pub-form .btn { height: 46px; padding: 0 var(--sp-6); font-size: 13px; }
+.pub-msg { margin: 0; font: var(--fw-regular) var(--fs-data) / 1.4 var(--font-mono); color: var(--ink-2); }
+.pub-msg.busy::before { content: "◐ "; color: var(--ws); }
+.pub-msg.bad { color: var(--down); font-weight: var(--fw-semi); font-size: 14px; }
+.pub-msg.bad::before { content: "✕ "; }
+.pub-what { list-style: none; margin: 0; padding: 0; display: grid; }
+.pub-what li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: var(--sp-3); align-items: baseline; padding: 7px 0; border-bottom: var(--bw) solid var(--line); font-size: var(--fs-body); color: var(--ink-2); }
+.pub-what li .k { font: var(--fw-semi) var(--fs-label) / 1 var(--font-mono); color: var(--ws); border: var(--bw) solid var(--line-2); border-radius: var(--r-1); padding: 3px 4px; text-align: center; }
+.pub-what li.cur { color: var(--ink); }
+.pub-what li.cur .k { background: var(--ws-fill); color: var(--ws-ink); border-color: var(--ws-fill); }
+.pub-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3); }
+.pub-first { padding-bottom: var(--sp-4); border-bottom: var(--bw) solid var(--line); }
+.pub-first .btn.primary { height: 40px; padding: 0 var(--sp-5); font-size: 13px; }
+.pub-how { border: var(--bw) solid var(--line-2); border-radius: var(--r-1); background: var(--card-h); }
+.pub-how > summary { cursor: pointer; padding: var(--sp-2) var(--sp-4); font: var(--fw-semi) var(--fs-label) / 1.4 var(--font-cond); letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--ink-2); }
+.pub-how > summary:hover { color: var(--ink); }
+.pub-how[open] > summary { border-bottom: var(--bw) solid var(--line); }
+.pub-how > .ledger { padding: 0 var(--sp-4) var(--sp-2); }
+.pub-lock[hidden] { display: none; }
+@keyframes pub-blink { 50% { opacity: 0; } }
+
+@media (max-width: 760px) {
+  .statusbar .conn.snap { display: flex; }
+  .statusbar .conn.snap .lg { display: none; }
+  .statusbar .conn.snap .sm { display: inline; }
+  .pub-disclaimer { flex-direction: column; margin-top: var(--sp-3); border-left-width: var(--bw); border-top-width: 4px; }
+  .pub-disclaimer .tag { flex-direction: row; align-items: baseline; flex-wrap: wrap; gap: var(--sp-3); padding: var(--sp-2) var(--sp-4); }
+  .pub-disclaimer p { padding: var(--sp-3) var(--sp-4); font-size: 14px; }
+  .pub-cells span { width: 34px; height: 42px; }
+  .pub-field { gap: var(--sp-3); }
+  .pub-form .btn { height: 42px; flex: 1 1 100%; }
+}
+@media (max-width: 390px) {
+  .pub-field .prompt { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pub-box:focus-within .pub-cells span.cur::after { animation: none; }
+}
+
+/* the market board is private (publish.py keeps /api/markets in the encrypted bundle): no empty MKTS strip before
+   the code is entered; lock.js removes the class after an unlock and loads the tape */
+body.pub-no-tape .ticker { display: none; }
+
+/* ---------------------------------------------------------------- the public header (lock.js adds body.pub) */
+/* the sub-tab codes are the app's command line; the public site has names only */
+body.pub .subtabs a .tabcode { display: none; }
+/* the switch: My Portfolio carries a lock (it opens with the owner's code) */
+.mode button b .pub-lk { flex: none; margin-left: 2px; color: var(--ink-3); }
+.mode button[aria-pressed="true"] b .pub-lk { color: var(--ink-2); }
+/* the snapshot time where the app has a ticking clock; the lab's clock in the status bar */
+body.pub .clock #pub-updated { color: var(--ink-2); }
+.statusbar .pub-sess b { color: var(--ink); font-weight: var(--fw-semi); }
+.statusbar .pub-sess .nx { color: var(--ink-2); }
+@media (max-width: 760px) {
+  /* one screen for the page: logo and status in the first row, the switch in the second; no F-key row or command line */
+  body.pub .tabs, body.pub .cmd { display: none; }
+  body.pub .top-right { grid-column: 3; grid-row: 1; }
+  body.pub .top-right .live span { display: inline; }
+  body.pub .statusbar .pub-sess { display: none; }
+  /* the disclaimer keeps its full text; the NOT ADVICE tag sits on its first line, the source line moves to the footer */
+  .pub-disclaimer { margin-top: var(--sp-2); border-top-width: 3px; }
+  .pub-disclaimer .tag { display: none; }
+  .pub-disclaimer p { padding: var(--sp-2) var(--sp-3); font-size: 13.5px; line-height: 1.45; }
+  .pub-disclaimer p::before {
+    content: "Not advice"; display: inline-block; margin-right: var(--sp-2); padding: 1px 5px; border-radius: var(--r-1);
+    background: var(--warn); color: var(--card); font: var(--fw-bold) 11px / 1.4 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; vertical-align: 1px;
+  }
+  .pub-disclaimer p span.src { display: none; }
+}
+body.pub .lab-read-r { grid-template-columns: 9ch minmax(0, 1fr) auto; }
+body.pub .lab-read-r .k { display: none; }

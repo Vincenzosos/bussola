@@ -1,0 +1,67 @@
+/* Overview (web/js/pages/home.js). Tokens only (web/app.css Part 1); dark, light and 390 px. Prefix .hm- */
+
+.hm-slot { min-height: 0; }
+.hm-tools { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-3) var(--sp-5); width: 100%; }
+.hm-change { margin-left: auto; font: var(--fw-regular) var(--fs-data) / 1.3 var(--font-mono); color: var(--ink-2); white-space: nowrap; }
+.hm-move { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.hm-legend:empty { display: none; }
+.card-b > .hm-chart { min-height: var(--chart-m); }
+.hm-dotted { text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; }
+
+/* figures inside panels */
+.hm-fig { font: var(--fw-regular) var(--fs-data) / 1.35 var(--font-mono); color: var(--ink-2); }
+.hm-fig b { font: var(--fw-semi) 18px / 1.2 var(--font-sans); letter-spacing: var(--track-hero); }
+.hm-fig b .dir { font-size: 0.6em; vertical-align: 0.2em; margin-right: 0.25em; }
+.hm-fund { display: grid; gap: var(--sp-1); }
+
+/* compact tables inside a narrow panel */
+.hm-mini .hm-trunc { display: inline-block; max-width: 22ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: bottom; }
+.hm-mini td:first-child, .hm-mini th:first-child, .hm-mkts td:first-child, .hm-mkts th:first-child { padding-left: 0; }
+.card-b.flush .hm-mkts td:first-child, .card-b.flush .hm-mkts th:first-child { padding-left: var(--pad); }
+.hm-mini td:last-child, .hm-mini th:last-child { padding-right: 0; }
+.hm-mkts .hm-p { font-weight: var(--fw-medium); color: var(--ink); }
+.hm-spark { display: inline-flex; align-items: center; justify-content: flex-end; gap: var(--sp-2); }
+.hm-spark .spark { display: inline-block; }
+.hm-sp { min-width: 4ch; font: var(--fw-regular) var(--fs-label) / 1 var(--font-mono); text-align: right; }
+
+/* briefing log and headline list */
+.hm-log .log .tx a { color: var(--ink); }
+.hm-log .log .tx a:hover { color: var(--you); }
+.hm-log .log .ty { white-space: nowrap; }
+.hm-status { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); font-size: var(--fs-data); color: var(--ink-2); line-height: 1.45; }
+.hm-news .news-item a { overflow-wrap: anywhere; }
+
+/* facts list: key left, value right, one hairline per row */
+.kv.hm-kv { grid-template-columns: max-content minmax(0, 1fr); }
+.hm-kv > dt { padding-right: var(--sp-4); white-space: nowrap; }
+.hm-kv > dd { overflow-wrap: anywhere; }
+
+/* the Trading Lab panel: paper, so an azzurro edge (the --violet token) on the My Portfolio page, and never mixed into the totals */
+.card.hm-lab { box-shadow: inset 2px 0 0 var(--violet); }
+.hm-lab-fig { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-2) var(--sp-5); }
+.hm-lab-l { font: var(--fw-semi) var(--fs-label) / 1.2 var(--font-cond); letter-spacing: var(--track-caps); text-transform: uppercase; color: var(--ink-3); }
+.hm-lab-v { font: var(--fw-semi) var(--fs-key) / 1.1 var(--font-sans); letter-spacing: var(--track-hero); color: var(--ink); margin-top: var(--sp-1); }
+.hm-lab-v .cur { font-size: 0.62em; color: var(--ink-2); margin-right: 1px; vertical-align: 0.26em; font-weight: var(--fw-medium); }
+.hm-lab-d { display: grid; gap: 2px; justify-items: end; font: var(--fw-regular) var(--fs-data) / 1.35 var(--font-mono); color: var(--ink-2); }
+.hm-lab-d .dir { font-size: 11px; margin-right: 0.2em; }
+.hm-lab-sc { display: grid; gap: var(--sp-2); }
+.hm-lab .progress:not(.ok):not(.bad):not(.warn) > span { background: var(--violet); }   /* paper: the lab's own colour, as on its page */
+.hm-lab-sc .hm-lab-l { text-transform: none; letter-spacing: 0; font: var(--fw-regular) var(--fs-body) / 1.4 var(--font-sans); color: var(--ink-2); }
+
+/* currencies: one stacked bar full width with its legend */
+.hm-ccy { display: grid; gap: var(--sp-2); }
+.hm-ccy .stack { height: 10px; }
+
+@media (max-width: 760px) {
+  .hm-change { margin-left: 0; white-space: normal; }
+  .hm-mini .hm-trunc { max-width: 16ch; }
+  .hm-mkts .sub, .hm-mini .sub { display: none; }
+  .hm-lab-d { justify-items: start; }
+}
+
+/* each panel body: a column with the panel's gap (the card body only spaces its direct children) */
+.hm-body { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; }
+.hm-fig small, .hm-kv small { font-size: var(--fs-label); }
+.hm-fig b .dir { font-size: 11px; }
+/* the held row's accent bar needs its own gutter where the first cell has no left padding (it covered the first letter) */
+.hm-mini tbody tr.you td:first-child, .hm-mkts tbody tr.you td:first-child { padding-left: 8px; }
